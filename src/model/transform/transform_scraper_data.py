@@ -73,3 +73,10 @@ class TransformScraperData:
                 result_links.append(href)
                 
         return result_links
+
+    def get_tables(url_page, indice = None):
+        tables = pd.read_html(url_page)
+
+        if indice != None and indice < len(tables):
+            return tables[indice]
+        return tables
