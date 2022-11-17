@@ -16,10 +16,33 @@ class TransformScraperData:
     html_soup : bs4.BeautifulSoup
         The return from html_parser()
 
+    key : string
+        A text value in a html element
+
 
     Methods
     -------
+    html_parser(
+        request_content
+    ):
+        Process the bytes from request_content to html parsed version
 
+
+    page_title(
+        html_soup
+    ):
+        Get the text from tag <title> in html and return in a string
+
+    get_all_links(
+        html_soup
+    ):
+        Get all the links and their respective texts and generate a text/href dictionary sorted by index
+
+    get_link_by_key(
+        html_soup,
+        key
+    ):
+        Receives a key and returns a list of all links found
 
     """
 
@@ -40,3 +63,13 @@ class TransformScraperData:
             links["href"].append(link.get('href'))
 
         return links
+
+    def get_link_by_key(html_soup, key):
+        links = TransformScraperData.get_all_links(html_soup)
+
+        result_links = []
+        for text, href in zip(links['text'], links['href']):
+            if key.replace(" ", "")  == text.replace(" ", ""):
+                result_links.append(href)
+                
+        return result_links
