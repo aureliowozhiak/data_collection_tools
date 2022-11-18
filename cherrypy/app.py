@@ -6,7 +6,7 @@ sys.path.append('../')
 
 from src.controller.extract.scraper import controllerScraper
 
-import sys
+
 sys.path.append('cherrypy/')
 
 header = open('src\header.html', 'r').read()
