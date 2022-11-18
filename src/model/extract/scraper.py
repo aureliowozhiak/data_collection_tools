@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 
 
-class Scraper:
+class modelScraper:
     """
     A class to do scraper in pages with specific (or not) parameters
 
@@ -35,7 +35,7 @@ class Scraper:
     def get_generical_page(url_page = "https://pt.wikipedia.org/wiki/Python"):
         return requests.get(url_page)
 
-    def get_tables(url_page, index = None):
+    def get_tables(url_page = "https://pt.wikipedia.org/wiki/Python", index = None):
         tables = pd.read_html(url_page)
 
         if index != None and index < len(tables):

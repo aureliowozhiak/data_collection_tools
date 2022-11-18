@@ -5,7 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Marcos Aurelio Wozhiak Junior">
-    <title>Data Collection Tools</title>
+
+    <script>
+
+      Object.defineProperty(String.prototype, 'capitalize', {
+        value: function() {
+          return this.charAt(0).toUpperCase() + this.slice(1);
+        },
+        enumerable: false
+      });
+
+      function getCurrentURL () {
+        return window.location.href
+      }
+
+      // Example
+      const url = getCurrentURL()
+
+      const {
+        host, hostname, href, origin, pathname, port, protocol, search
+      } = window.location
+
+      actual_page = pathname.replace("/", "").replace("/", "")
+      actual_page = actual_page.toLowerCase();
+      actual_page = actual_page.capitalize();
+
+      if(actual_page == ""){
+        actual_page = "Home"
+      }
+    </script>
+
+    <script>document.write(`<title>Data Collection Tools | ${actual_page}</title>`);</script>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
     <!-- CSS only -->
@@ -23,7 +53,7 @@
             </a>
     
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
+              <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
               <li><a href="/about" class="nav-link px-2 text-white">About</a></li>
             </ul>
     
