@@ -23,10 +23,20 @@ class controllerScraper:
 
         if scraper_type == "table_scraping":
             try:
-                return f'<script>{tabletools_js}</script> \
-                    {modelScraper.get_tables(f"{input_value}")[index].to_html()} <br> \
-                    <a href="#" onclick="download_table_as_csv(\'dataframe\');">Download as CSV</a>'
+                tables = modelScraper.get_tables(f"{input_value}")
+                max = len(tables)
+
+                if index <= 0:
+                    index = max + 1
+
+                if  max >= index:
+                    table = tables[index - 1]
+                    return f'<script>{tabletools_js}</script> \
+                        {table.to_html()} <br> \
+                        <a href="#" onclick="download_table_as_csv(\'dataframe\');">Download as CSV</a>'
+                else:
+                    return f'This page has just {max} tables'
             except:
-                return f'{input_value}'
+                return f'Tables not found'
         else:
             return ""
