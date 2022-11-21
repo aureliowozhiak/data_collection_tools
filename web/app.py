@@ -1,14 +1,11 @@
-import cherrypy
-from src.view import View
-
 import sys
-sys.path.append('../')
 
+sys.path.append('../')
 from src.controller.extract.scraper import controllerScraper
 
-
 sys.path.append('cherrypy/')
-
+import cherrypy
+from src.view import View
 header = open('src\header.html', 'r').read()
 
 class Root(object):
@@ -22,6 +19,12 @@ class AboutPage:
     @cherrypy.expose
     def index(self):
         return header
+
+class ContactPage:
+
+    @cherrypy.expose
+    def index(self):
+        return header + "<h1>Contact us</h1>"
 
 class Tools:
     def __init__(self):
@@ -48,6 +51,7 @@ class ScraperTools:
 
 root = Root()
 root.about = AboutPage()
+root.contact = ContactPage()
 
 root.tools = Tools()
 
