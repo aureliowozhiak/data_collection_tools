@@ -1,5 +1,5 @@
 
-class View:
+class WebView:
 
     def index():
         return open('src/index.html', 'r').read()

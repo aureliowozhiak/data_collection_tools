@@ -2,17 +2,20 @@ import sys
 
 sys.path.append('../')
 from src.controller.extract.scraper import controllerScraper
+from src.view.web.web_view import WebView
 
-sys.path.append('cherrypy/')
-import cherrypy
-from src.view import View
+sys.path.append('web/')
 header = open('src\header.html', 'r').read()
+
+sys.path.append('../cherrypy/')
+import cherrypy
+
 
 class Root(object):
 
     @cherrypy.expose
     def index(self):
-        return header + View.index()
+        return header + WebView.index()
 
 class AboutPage:
 
@@ -40,7 +43,7 @@ class TableScraping:
 
     @cherrypy.expose
     def index(self):
-        return header + View.table_scraping()
+        return header + WebView.table_scraping()
 
 class ScraperTools:
 
