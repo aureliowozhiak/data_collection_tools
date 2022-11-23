@@ -35,3 +35,6 @@ class viewScraper:
                 return f'This page has just {max} tables'
         except:
             return f'Tables not found'
+
+    def web_scraping(df):
+        return f'{len(df)}'

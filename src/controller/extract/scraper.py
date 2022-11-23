@@ -19,6 +19,9 @@ class controllerScraper:
         scraper_type = str(scraper_type)
 
         if scraper_type == "table_scraping":
-            return viewScraper.table_scraping(input_value, modelScraper.get_tables(f"{input_value}"), index)
+            return viewScraper.table_scraping(input_value, modelScraper.get_tables(input_value), index)
         
+        if scraper_type == "web_scraping":
+            return viewScraper.web_scraping(modelScraper.get_data_from_page(input_value))
+
         return ""

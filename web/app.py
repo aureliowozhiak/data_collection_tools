@@ -39,6 +39,7 @@ class BlogPage:
 class Tools:
     def __init__(self):
         self.table_scraping = TableScraping()
+        self.web_scraping = WebScraping()
 
         self.scraper = ScraperTools()
 
@@ -47,6 +48,12 @@ class Tools:
         return "<script>window.location.replace('/');</script>"
 
 class TableScraping:
+
+    @cherrypy.expose
+    def index(self):
+        return header + WebView.table_scraping()
+
+class WebScraping:
 
     @cherrypy.expose
     def index(self):
