@@ -57,7 +57,7 @@ class WebScraping:
 
     @cherrypy.expose
     def index(self):
-        return header + WebView.table_scraping()
+        return header + WebView.web_scraping()
 
 class ScraperTools:
 
