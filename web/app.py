@@ -22,13 +22,7 @@ class AboutPage:
 
     @cherrypy.expose
     def index(self):
-        return header
-
-class ContactPage:
-
-    @cherrypy.expose
-    def index(self):
-        return header + "<h1>Contact us</h1>"
+        return header + WebView.about()
 
 class BlogPage:
 
@@ -68,7 +62,6 @@ class ScraperTools:
 
 root = Root()
 root.about = AboutPage()
-root.contact = ContactPage()
 
 root.blog = BlogPage()
 
