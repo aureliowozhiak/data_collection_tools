@@ -4,6 +4,9 @@ class WebView:
     def index():
         return open('src/index.html', 'r').read()
 
+    def about():
+        return open('src/about.html', 'r').read()
+
     def table_scraping():
         return open('src/tools/table_scraping.html', 'r').read()
 
