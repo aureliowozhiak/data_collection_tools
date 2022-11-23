@@ -58,6 +58,11 @@ class ScraperTools:
     def index(self, input_value=None, scraper_type=None, index=0):
         return header + controllerScraper.main(input_value, scraper_type, index)
 
+class Search:
+    @cherrypy.expose
+    def index(self, search=None):
+        return header + f"{search}"
+
 
 root = Root()
 root.about = AboutPage()
@@ -65,6 +70,8 @@ root.about = AboutPage()
 root.blog = BlogPage()
 
 root.tools = Tools()
+
+root.search = Search()
 
 if __name__ == '__main__':
    #cherrypy.quickstart(root, '/', {'global': {'server.socket_host':'0.0.0.0','server.socket_port': 8080}})
