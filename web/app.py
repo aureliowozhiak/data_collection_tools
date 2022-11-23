@@ -6,7 +6,7 @@ from src.view.web.web_view import WebView
 from src.controller.blog.tabnews import controllerTabNews
 
 sys.path.append('web/')
-header = open('src\header.html', 'r').read()
+header = open('src/header.html', 'r').read()
 
 sys.path.append('../cherrypy/')
 import cherrypy
