@@ -1,3 +1,0 @@
-gcc                     [platform:dpkg]
-libenchant1c2a          [platform:dpkg]
-python3-dev             [platform:dpkg]

@@ -10,11 +10,13 @@ class viewTabNews:
         return None
 
     def home(post_content):
-        list_of_links_html = "<ul>"
+        body = "<br>"
+        body += '<div class="container"><div class="card-group">'
+        body += "<ul class='list-group list-group-flush'>"
         for post in post_content:
-            list_of_links_html += f"<li><a href='../blog?page={post['slug']}'>{post['title']}</a></li>"
-        list_of_links_html += "</ul>"
-        return list_of_links_html
+            body += f"<li class='list-group-item'><a href='../blog?page={post['slug']}'>{post['title']}</a></li>"
+        body += "</ul>"
+        return body
 
     def page(post_content):
 

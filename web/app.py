@@ -68,4 +68,4 @@ root.blog = BlogPage()
 root.tools = Tools()
 
 if __name__ == '__main__':
-   cherrypy.quickstart(root, '/')
+   cherrypy.quickstart(root, '/', {'global': {'server.socket_host':'0.0.0.0','server.socket_port': 8080}})
