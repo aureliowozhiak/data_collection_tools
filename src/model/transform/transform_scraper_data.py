@@ -64,7 +64,15 @@ class transformScraperData:
             links["text"].append(link.get_text())
             links["href"].append(link.get('href'))
 
-        return links
+        df_links = pd.DataFrame()
+        df_links["text"] = links["text"]
+        df_links["href"] = links["href"]
+
+        df_links = df_links.drop(df_links[df_links.href == "#"].index)
+        df_links = df_links.drop(df_links[df_links.text == ""].index)
+        df_links = df_links.reset_index()[['text', 'href']]
+
+        return df_links
 
     def get_link_by_key(html_soup, key):
         links = transformScraperData.get_all_links(html_soup)
