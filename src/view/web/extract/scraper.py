@@ -38,7 +38,7 @@ class viewScraper:
 
     def web_scraping(dict_of_data, input_value):
 
-        body = '<hr><div class="container text-center">'
+        body = '<br><div class="container text-center">'
 
         body += ""
 
@@ -58,7 +58,7 @@ class viewScraper:
 
             count_cards += 1
 
-        body += '</div></div><hr>'
+        body += '</div></div><br>'
         return body
 
 
