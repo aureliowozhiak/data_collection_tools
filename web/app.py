@@ -3,6 +3,7 @@ import sys
 sys.path.append('../')
 from src.controller.extract.scraper import controllerScraper
 from src.view.web.web_view import WebView
+from src.controller.blog.tabnews import controllerTabNews
 
 sys.path.append('web/')
 header = open('src\header.html', 'r').read()
@@ -28,6 +29,12 @@ class ContactPage:
     @cherrypy.expose
     def index(self):
         return header + "<h1>Contact us</h1>"
+
+class BlogPage:
+
+    @cherrypy.expose
+    def index(self, page = None):
+        return header + controllerTabNews.home(user="aureliowozhiak", page=page)
 
 class Tools:
     def __init__(self):
@@ -55,6 +62,8 @@ class ScraperTools:
 root = Root()
 root.about = AboutPage()
 root.contact = ContactPage()
+
+root.blog = BlogPage()
 
 root.tools = Tools()
 
