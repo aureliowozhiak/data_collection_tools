@@ -63,7 +63,7 @@ class ScraperTools:
 
     @cherrypy.expose
     def index(self, input_value=None, scraper_type=None, index=0):
-        return controllerScraper.main(input_value, scraper_type, index)
+        return header + controllerScraper.main(input_value, scraper_type, index)
 
 
 root = Root()
@@ -75,4 +75,5 @@ root.blog = BlogPage()
 root.tools = Tools()
 
 if __name__ == '__main__':
-   cherrypy.quickstart(root, '/', {'global': {'server.socket_host':'0.0.0.0','server.socket_port': 8080}})
+   #cherrypy.quickstart(root, '/', {'global': {'server.socket_host':'0.0.0.0','server.socket_port': 8080}})
+   cherrypy.quickstart(root, '/', {'global': {'server.socket_host':'127.0.0.1','server.socket_port': 8080}})
