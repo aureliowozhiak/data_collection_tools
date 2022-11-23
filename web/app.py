@@ -11,7 +11,6 @@ header = open('src/header.html', 'r').read()
 sys.path.append('../cherrypy/')
 import cherrypy
 
-
 class Root(object):
 
     @cherrypy.expose
