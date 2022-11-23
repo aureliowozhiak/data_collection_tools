@@ -2,7 +2,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 
-class TransformScraperData:
+class transformScraperData:
     """
     A class to transform the data extract from scraper  
 
@@ -67,7 +67,7 @@ class TransformScraperData:
         return links
 
     def get_link_by_key(html_soup, key):
-        links = TransformScraperData.get_all_links(html_soup)
+        links = transformScraperData.get_all_links(html_soup)
 
         result_links = []
         for text, href in zip(links['text'], links['href']):
