@@ -41,3 +41,6 @@ class modelScraper:
         if index != None and index < len(tables):
             return tables[index]
         return tables
+
+    def get_data_from_page(url_page = "https://pt.wikipedia.org/wiki/Python"):
+        return modelScraper.get_generical_page(url_page).content
