@@ -11,7 +11,50 @@ import os
 tabletools_js = open('src/js/tabletools.js', 'r').read()
 
 class viewScraper:
+    """
+    A class to consolidate the html pages for the scraper modules
+
+    ---
+
+    Attributes
+    ----------
+    input_value : string
+        The generic input value of the url parameter (informed in the html form)
+
+    tables : list of dataframes
+        The return from table scraping, this is a list with all dataframes founded
+
+    index : int
+        It's a index indentifier to find the item position
+
+    dict_of_data : dict
+        A dict with the return from the web scraping
+
+    df_links : dataframe
+        A dataframe with links found on the page in table format
+
+    Methods
+    -------
+    table_scraping(
+        input_value=None, 
+        tables=None, 
+        index=0
+    ):
+        Return the html to create a page with the table and a link to download the table found.
+
     
+    web_scraping(
+        dict_of_data, 
+        input_value
+    ):
+        Return the html to create the web scraping page result. This page has a logic based in: 
+            "just create the element if you find something"
+    links(
+        df_links
+    ):
+        Return the html to create a page with a table containing the links in the df_links
+
+    """
 
     def __init__(self):
         return None
@@ -66,11 +109,11 @@ class viewScraper:
         return body
 
 
-    def links(df):
+    def links(df_links):
         return f'<div class="container"><div class="row"><div class="col-sm"><script>{tabletools_js}</script> \
                     <br>\
                     <a href="#" onclick="download_table_as_csv(\'dataframe\');"><button type="button" class="btn btn-primary">Download as CSV</button></a> \
-                     <br> <br> {df.to_html()} <br> \
+                     <br> <br> {df_links.to_html()} <br> \
                       <script type="text/javascript"> \
                         add_class_by_class(\'table\', \'dataframe\'); \
                     </script> \

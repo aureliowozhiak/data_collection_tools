@@ -26,6 +26,11 @@ class modelScraper:
         index = None
     ):
         Return the tables found in the page in a dataframe
+
+    get_data_from_page(
+        url_page
+    ):
+        Return the content from get_generical_page()
     """
 
     def __init__(self):

@@ -5,7 +5,31 @@ import sys
 sys.path.append('../')
 
 class viewTabNews:
+    """
+    A class to build html pages
+
+    ---
+
+    Attributes
+    ----------
+    post_content : list
+        A list with all posts contents
+
+
+    Methods
+    -------
+    home(
+        post_content
+    ):
+        Create a home page to the blog, with a list link to all posts 
+
+    page(
+        post_content
+    ):
+        Create a specific page, based on just one post
     
+    
+    """
     def __init__(self):
         return None
 
