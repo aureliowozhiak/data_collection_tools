@@ -11,6 +11,12 @@ header = open('src/header.html', 'r').read()
 sys.path.append('../cherrypy/')
 import cherrypy
 
+
+"""
+    App constructor using CherryPy module:
+        Here we have all routes and pages flow
+"""
+
 class Root(object):
 
     @cherrypy.expose
@@ -58,7 +64,7 @@ class ScraperTools:
 
     @cherrypy.expose
     def index(self, input_value=None, scraper_type=None, index=0):
-        return header + controllerScraper.main(input_value, scraper_type, index)
+        return header + controllerScraper.main(input_value, scraper_type, index)['html']
 
 class Search:
     @cherrypy.expose
