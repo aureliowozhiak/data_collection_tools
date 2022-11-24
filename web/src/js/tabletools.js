@@ -28,3 +28,8 @@ function download_table_as_csv(table_class, separator = ',') {
     link.click();
     document.body.removeChild(link);
 }
+
+function add_class_by_class(class_to_add, class_to_find){
+    document.getElementsByClassName(class_to_find)[0].className += ' ' + class_to_add
+}
+

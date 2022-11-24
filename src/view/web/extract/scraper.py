@@ -27,10 +27,14 @@ class viewScraper:
                 index = max + 1
             if  max >= index:
                 table = tables[index - 1]
-                return f'<div class="container"><script>{tabletools_js}</script> \
+                return f'<div class="container"><div class="row"><div class="col-sm"><script>{tabletools_js}</script> \
+                    <script></script> \
                     <br>\
                     <a href="#" onclick="download_table_as_csv(\'dataframe\');"><button type="button" class="btn btn-primary">Download as CSV</button></a> \
-                     <br> <br> {table.to_html()} <br></div>'
+                     <br> <br> {table.to_html()} <br></div> \
+                        <script type="text/javascript"> \
+                        add_class_by_class(\'table\', \'dataframe\'); \
+                    </script></div></div>'
             else:
                 return f'This page has just {max} tables'
         except:
@@ -63,9 +67,13 @@ class viewScraper:
 
 
     def links(df):
-        return f'<div class="container"><script>{tabletools_js}</script> \
+        return f'<div class="container"><div class="row"><div class="col-sm"><script>{tabletools_js}</script> \
                     <br>\
                     <a href="#" onclick="download_table_as_csv(\'dataframe\');"><button type="button" class="btn btn-primary">Download as CSV</button></a> \
-                     <br> <br> {df.to_html()} <br></div>'
+                     <br> <br> {df.to_html()} <br> \
+                      <script type="text/javascript"> \
+                        add_class_by_class(\'table\', \'dataframe\'); \
+                    </script> \
+                     </div></div></div>'
 
 
