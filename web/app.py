@@ -21,7 +21,9 @@ class AboutPage:
 
     @cherrypy.expose
     def index(self):
-        return header + WebView.about()
+        return header + controllerTabNews.home(user="aureliowozhiak", page="data-tools-ferramenta-em-desenvolvimento-para-trabalhar-com-dados-projeto-github")
+
+
 
 class BlogPage:
 
