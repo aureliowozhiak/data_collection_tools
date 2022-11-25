@@ -13,6 +13,8 @@ class controllerMath:
         return None
 
     def calc_expression(input_value, scraper_type):
+        input_value = input_value.replace("^", "**")
+
         return f"{input_value} = {viewMath.calc_expression(modelMath.calc_expression(input_value))}"
 
     
