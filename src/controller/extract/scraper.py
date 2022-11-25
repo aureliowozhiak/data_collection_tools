@@ -59,12 +59,12 @@ class controllerScraper:
         html_soup = transformScraperData.html_parser(page_content)
         df_links = transformScraperData.get_all_links(html_soup)
 
-        def wikipedia(html_soup, input_value):
+        def wikipedia(html_soup, input_value, extra_content=""):
             try:
                 list_of_paragraphs = transformScraperData.get_all_paragraph_content(html_soup.find_all(class_="mw-content-container")[0])
 
                 return {
-                    'html' : viewScraper.wikipedia_content(list_of_paragraphs, transformScraperData.page_title(html_soup), input_value),
+                    'html' : extra_content + viewScraper.wikipedia_content(list_of_paragraphs, transformScraperData.page_title(html_soup), input_value),
                     'list_of_paragraphs' : list_of_paragraphs
                 }
             except:
@@ -72,7 +72,10 @@ class controllerScraper:
 
 
         if scraper_type == "wikipedia":
-            return wikipedia(html_soup, input_value)
+            extra_content = f'<script type="text/javascript"> \
+            let element = document.evaluate("/html/body/div/nav", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null); \
+            element.singleNodeValue.remove(); </script>'
+            return wikipedia(html_soup, input_value, extra_content)
 
         if scraper_type == "web_scraping":
 
