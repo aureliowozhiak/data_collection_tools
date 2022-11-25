@@ -5,6 +5,8 @@ from src.controller.extract.scraper import controllerScraper
 from src.view.web.web_view import WebView
 from src.controller.blog.tabnews import controllerTabNews
 
+from src.controller.another_tools.math import controllerMath
+
 sys.path.append('web/')
 header = open('src/header.html', 'r').read()
 
@@ -41,6 +43,7 @@ class Tools:
     def __init__(self):
         self.table_scraping = TableScraping()
         self.web_scraping = WebScraping()
+        self.math = Math()
 
         self.scraper = ScraperTools()
 
@@ -71,7 +74,14 @@ class Search:
     def index(self, search=None):
         return header + f"{search}"
 
-
+class Math:
+    @cherrypy.expose
+    def index(self, input_value=None, scraper_type=None, index=0):
+        if scraper_type:
+            return header + WebView.math() + controllerMath.calc_expression(input_value=input_value, scraper_type=scraper_type)
+        else:
+            return header + WebView.math()
+            
 root = Root()
 root.about = AboutPage()
 

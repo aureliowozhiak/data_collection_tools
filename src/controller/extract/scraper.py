@@ -25,6 +25,8 @@ class controllerScraper:
     index : string
         In some cases, we have the content index to find specific content
 
+    extra_content : string
+        Extra content to insert in html page
 
     Methods
     -------
@@ -35,7 +37,12 @@ class controllerScraper:
     ):
         Organize the flow and decide which type of scraper we have
 
-    
+    wikipedia(
+        html_soup, 
+        input_value,
+        extra_content
+    )
+        Controll the wikipedia page flow
 
 
     """
