@@ -38,6 +38,12 @@ class viewScraper:
     list_to_table : list
         A list with data content to create a table in page
 
+    title : string
+        The title of something
+
+    list_of_paragraphs : list
+        A lista with paragraph tags value <p>
+
     Methods
     -------
     table_scraping(
@@ -58,6 +64,17 @@ class viewScraper:
         df_links
     ):
         Return the html to create a page with a table containing the links in the df_links
+
+    list_to_table(
+        list_to_table, 
+        title
+    ):
+        Return the html to create a page with a table containing the list content
+
+    wikipedia_content(
+        list_of_paragraphs
+    )
+        Convert a list with paragraphs text, in a html <p> components
 
     """
 
@@ -130,9 +147,14 @@ class viewScraper:
             count_cards += 1
         body += '</div>'
 
-
-
         body += '</div></div><br>'
+        
+        body += '<br><div class="container">'
+        
+        if dict_of_data['wikipedia_content']:
+            body += str(dict_of_data['wikipedia_content']['html'])
+            body += '</div>'
+
         return body
 
 
@@ -160,4 +182,14 @@ class viewScraper:
                     </script> \
                      </div></div></div>'
 
+    def wikipedia_content(list_of_paragraphs, title, url):
+        
+        content = f"<h1>{title}</h1>"
+
+        content += f"<p><small><em>&lt;Texto extraído da página: <a href='{url}'>{url}</a>&gt;</em></small></p>"
+        
+        for p_text in list_of_paragraphs:
+            content += f"<p>{p_text}</p>"
+
+        return content
 
