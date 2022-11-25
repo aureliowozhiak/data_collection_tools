@@ -62,11 +62,11 @@ class controllerScraper:
                     }
         
         
-        page_content = modelScraper.get_data_from_page(input_value)
-        html_soup = transformScraperData.html_parser(page_content)
-        df_links = transformScraperData.get_all_links(html_soup)
-
         def wikipedia(html_soup, input_value, extra_content=""):
+            
+            input_value = str(input_value.replace("pt.m.wikipedia", "pt.wikipedia"))
+            page_content = modelScraper.get_data_from_page(input_value)
+            html_soup = transformScraperData.html_parser(page_content)
             try:
                 list_of_paragraphs = transformScraperData.get_all_paragraph_content(html_soup.find_all(class_="mw-content-container")[0])
 
@@ -77,7 +77,9 @@ class controllerScraper:
             except:
                 return {'html': '', 'list_of_paragraphs': ''}
 
-
+        page_content = modelScraper.get_data_from_page(input_value)
+        html_soup = transformScraperData.html_parser(page_content)
+        df_links = transformScraperData.get_all_links(html_soup)
         if scraper_type == "wikipedia":
             extra_content = f'<script type="text/javascript"> \
             let element = document.evaluate("/html/body/div/nav", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null); \
