@@ -4,3 +4,4 @@ markdown==3.4.1
 lxml==4.9.1
 bs4==0.0.1
 CherryPy==18.8.0
+numexpr==2.8.4

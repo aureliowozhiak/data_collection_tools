@@ -56,6 +56,9 @@ class WebView:
     def web_scraping():
         return open('src/tools/web_scraping.html', 'r').read()
 
+    def math():
+        return open('src/tools/math.html', 'r').read()
+
     def add_card(title, describe, button_text, button_href):
         return f"""<div class="card" style="width: 18rem;">
             <!-- <img class="card-img-top" src="..." alt="Card image cap"> --> 
