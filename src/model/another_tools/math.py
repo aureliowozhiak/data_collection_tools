@@ -11,5 +11,8 @@ class modelMath:
         return None
 
     def calc_expression(expression):
-        return ne.evaluate(expression)
+        try:
+            return ne.evaluate(expression)
+        except:
+            return "Invalid Expression Error"
     
