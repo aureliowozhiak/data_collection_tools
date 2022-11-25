@@ -16,8 +16,8 @@ class viewMath:
                     Multiplicação: 2 <b>*</b> 2 <br> \
                     Divisão: 4 <b>/</b> 2 = 2<br> \
                     Potenciação: 2 <b>^</b> 3 = 8 ou 2<b>**</b>3 = 8<br> \
-                    Raiz quadrada: <b>sqrt(</b>10<b>)</b> <br> \
-                    Resto de divisão: 3<b>%</b>2 <br></p>"
+                    Raiz quadrada: <b>sqrt(</b>90<b>)</b> = 3 (3.0) <br> \
+                    Resto de divisão: 3 <b>%</b> 2 = 1 <br></p>"
 
         if expression != "Invalid Expression Error":
             return f'<strong>{expression}</strong>' + sintaxe

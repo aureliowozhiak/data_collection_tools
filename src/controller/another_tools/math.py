@@ -12,9 +12,12 @@ class controllerMath:
     def __init__(self):
         return None
 
-    def calc_expression(input_value, scraper_type):
+    def main(input_value="2+2", math_type="calc_expression"):
         input_value = input_value.replace("^", "**")
 
-        return f"{input_value} = {viewMath.calc_expression(modelMath.calc_expression(input_value))}"
+        if math_type == "calc_expression":
+            return f"{input_value} = {viewMath.calc_expression(modelMath.calc_expression(input_value))}"
+        else:
+            return ""
 
     
