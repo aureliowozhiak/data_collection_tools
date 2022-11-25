@@ -59,13 +59,29 @@ class controllerScraper:
         html_soup = transformScraperData.html_parser(page_content)
         df_links = transformScraperData.get_all_links(html_soup)
 
+        def wikipedia(html_soup, input_value):
+            try:
+                list_of_paragraphs = transformScraperData.get_all_paragraph_content(html_soup.find_all(class_="mw-content-container")[0])
+
+                return {
+                    'html' : viewScraper.wikipedia_content(list_of_paragraphs, transformScraperData.page_title(html_soup), input_value),
+                    'list_of_paragraphs' : list_of_paragraphs
+                }
+            except:
+                return {'html': '', 'list_of_paragraphs': ''}
+
+
+        if scraper_type == "wikipedia":
+            return wikipedia(html_soup, input_value)
+
         if scraper_type == "web_scraping":
 
             dict_of_data = {
                 'df_links': df_links,
                 'page_title': transformScraperData.page_title(html_soup),
                 'all_paragraph_content' : transformScraperData.get_all_paragraph_content(html_soup),
-                'all_key_content' : transformScraperData.get_all_key_content(html_soup)
+                'all_key_content' : transformScraperData.get_all_key_content(html_soup),
+                'wikipedia_content' : wikipedia(html_soup, input_value)
                 }
 
             return {
