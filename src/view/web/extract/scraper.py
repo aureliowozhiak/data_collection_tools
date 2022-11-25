@@ -185,11 +185,7 @@ class viewScraper:
 
     def wikipedia_content(list_of_paragraphs, title, url):
 
-        content = f'<script type="text/javascript"> \
-            let element = document.evaluate("/html/body/div/nav", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null); \
-            element.singleNodeValue.remove(); </script>'
-
-        content += f"<h1>{title}</h1>"
+        content = f"<h1>{title}</h1>"
 
         content += f"<p><small><em>&lt;Texto extraído da página: <a href='{url}'>{url}</a>&gt;"
 
