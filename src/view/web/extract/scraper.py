@@ -187,7 +187,7 @@ class viewScraper:
 
         content = f"<h1>{title}</h1>"
 
-        content += f"<p><small><em>&lt;Texto extraído da página: <a href='{url}'>{url}</a>&gt;"
+        content += f"<p><small><em>&lt;Texto extraído da página: <a href='{url}'>{title}</a>&gt;"
 
         content += f"<a href='" + f"?scraper_type=wikipedia&index=-1&input_value={url}'> Ver apenas o artigo</a></em></small></p>"
         
