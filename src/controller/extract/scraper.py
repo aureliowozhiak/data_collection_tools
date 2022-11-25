@@ -63,7 +63,9 @@ class controllerScraper:
 
             dict_of_data = {
                 'df_links': df_links,
-                'page_title': transformScraperData.page_title(html_soup)
+                'page_title': transformScraperData.page_title(html_soup),
+                'all_paragraph_content' : transformScraperData.get_all_paragraph_content(html_soup),
+                'all_key_content' : transformScraperData.get_all_key_content(html_soup)
                 }
 
             return {
@@ -78,5 +80,21 @@ class controllerScraper:
                     'html': viewScraper.links(df_links),
                     'df_links': df_links
                     }
+
+        if scraper_type == "p_scrapping":
+            p_list = transformScraperData.get_all_paragraph_content(html_soup)
+
+            return {
+                    'html': viewScraper.list_to_table(p_list, 'paragraphs'),
+                    'p_list': p_list
+            }
+
+        if scraper_type == "key_content_scrapping":
+            key_content_scrapping_list = transformScraperData.get_all_key_content(html_soup)
+
+            return {
+                    'html': viewScraper.list_to_table(key_content_scrapping_list, 'key_content'),
+                    'key_content_scrapping_list': key_content_scrapping_list
+            }
 
         return ""

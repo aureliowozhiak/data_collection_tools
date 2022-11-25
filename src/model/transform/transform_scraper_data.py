@@ -19,6 +19,9 @@ class transformScraperData:
     key : string
         A text value in a html element
 
+    element_id : string
+        An id from a html element
+
 
     Methods
     -------
@@ -44,6 +47,22 @@ class transformScraperData:
     ):
         Receives a key and returns a list of all links found
 
+    get_all_key_content(
+        html_soup
+    ):
+        Returns all list item <ul>, <ol> and <li> content found in page
+
+    get_all_paragraph_content(
+        html_soup
+    ):
+        Returns all paragraph <p> content found in page
+
+    get_value_by_id(
+        html_soup,
+        element_id
+    ):
+        Return an element by id
+    
 
 
     """
@@ -55,7 +74,10 @@ class transformScraperData:
         return BeautifulSoup(request_content, 'html.parser')
 
     def page_title(html_soup):
-        return html_soup.title.get_text()
+        try:
+            return html_soup.title.get_text()
+        except:
+            return ""
     
     def get_all_links(html_soup):
         links = {"text":[],"href":[]}
@@ -83,4 +105,29 @@ class transformScraperData:
                 result_links.append(href)
                 
         return result_links
+
+    def get_all_key_content(html_soup):
+        items = []
+        for i in html_soup.find_all('ul') + html_soup.find_all('ol') + html_soup.find_all('li'):
+            items = items + i.text.strip().split("\n")
+
+        key_content = []
+        for item in items:
+            if item.replace(" ", "") != "":
+                key_content.append(item.strip())
+
+        return list(dict.fromkeys(key_content))
+        
+    def get_all_paragraph_content(html_soup):
+        paragraph_content_list = []
+        for phrase in html_soup.find_all('p'):
+            phrase_clean = phrase.text.strip().replace("\n", "").replace("\t", "")
+            if phrase_clean.replace(" ", "") != "":
+                paragraph_content_list.append(phrase_clean)
+
+        return list(dict.fromkeys(paragraph_content_list))
+
+    #### NEEDS TO BE FINISHED
+    def get_value_by_id(html_soup, element_id):
+        return html_soup.find(id=element_id)
 
