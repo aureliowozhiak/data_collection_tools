@@ -76,11 +76,8 @@ class Search:
 
 class Math:
     @cherrypy.expose
-    def index(self, input_value=None, scraper_type=None, index=0):
-        if scraper_type:
-            return header + WebView.math() + controllerMath.calc_expression(input_value=input_value, scraper_type=scraper_type)
-        else:
-            return header + WebView.math()
+    def index(self, input_value="2+2", math_type="calc_expression"):
+        return header + WebView.math() + controllerMath.main(input_value=input_value, math_type=math_type)
             
 root = Root()
 root.about = AboutPage()
