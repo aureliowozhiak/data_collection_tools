@@ -9,6 +9,7 @@ import os
 
 try:
     tabletools_js = open('src/js/tabletools.js', 'r').read()
+    html2js_js = open('src/js/html2js.js', 'r').read()
 except:
     pass
 
@@ -183,10 +184,16 @@ class viewScraper:
                      </div></div></div>'
 
     def wikipedia_content(list_of_paragraphs, title, url):
-        
-        content = f"<h1>{title}</h1>"
 
-        content += f"<p><small><em>&lt;Texto extraído da página: <a href='{url}'>{url}</a>&gt;</em></small></p>"
+        content = f'<script type="text/javascript"> \
+            let element = document.evaluate("/html/body/div/nav", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null); \
+            element.singleNodeValue.remove(); </script>'
+
+        content += f"<h1>{title}</h1>"
+
+        content += f"<p><small><em>&lt;Texto extraído da página: <a href='{url}'>{url}</a>&gt;"
+
+        content += f"<a href='" + f"?scraper_type=wikipedia&index=-1&input_value={url}'> Ver apenas o artigo</a></em></small></p>"
         
         for p_text in list_of_paragraphs:
             content += f"<p>{p_text}</p>"
