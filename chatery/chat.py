@@ -108,9 +108,10 @@ class Chat(object):
         return header + """<script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
       <script type='application/javascript'>
         $(document).ready(function() {
-          websocket = '%(scheme)s://%(host)s:%(port)s/ws?username=%(username)s';
+        
+          websocket = '%(scheme)s://'+window.location.href.split("/")[2].replace(":9000","")+':%(port)s/ws?username=%(username)s';
           if (window.WebSocket) {
-            ws = new WebSocket(websocket, ['mytest']);
+            ws = new WebSocket(websocket, ['tcp']);
           }
           else if (window.MozWebSocket) {
             ws = MozWebSocket(websocket);
@@ -158,7 +159,7 @@ class Chat(object):
     </div>
     </body>
     </html>
-    """ % {'username': username, 'host': self.host,
+    """ % {'username': username, 
            'port': self.ssl_port if self.ssl else self.port, 'scheme': self.scheme,
            'messages': "\n".join(messages) +  "\n"}
 
@@ -174,8 +175,8 @@ if __name__ == '__main__':
     configure_logger(level=logging.DEBUG)
 
     parser = argparse.ArgumentParser(description='Echo CherryPy Server')
-    parser.add_argument('--host', default='127.0.0.1')
-    #parser.add_argument('--host', default='0.0.0.0')
+    #parser.add_argument('--host', default='127.0.0.1')
+    parser.add_argument('--host', default='0.0.0.0')
     parser.add_argument('-p', '--port', default=9000, type=int)
     parser.add_argument('--ssl-port', default=9443, type=int)
     parser.add_argument('--ssl', action='store_true')
@@ -193,7 +194,7 @@ if __name__ == '__main__':
         '/ws': {
             'tools.websocket.on': True,
             'tools.websocket.handler_cls': ChatWebSocketHandler,
-            'tools.websocket.protocols': ['toto', 'mytest', 'hithere']
+            'tools.websocket.protocols': ['tcp', 'toto', 'mytest', 'hithere']
         },
         '/static': {
               'tools.staticdir.on': True,
