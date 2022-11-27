@@ -100,7 +100,7 @@ class Chat(object):
         username = username or "User%d" % random.randint(0, 100)
         messages = []
         with sqlite3.connect(DB_STRING) as dbc:
-            result = dbc.execute("SELECT * FROM messages LIMIT 1000")
+            result = dbc.execute("SELECT * FROM messages LIMIT 50")
             for row in result:
                 msg = row[2]
                 messages.append(msg)
@@ -175,8 +175,8 @@ if __name__ == '__main__':
     configure_logger(level=logging.DEBUG)
 
     parser = argparse.ArgumentParser(description='Echo CherryPy Server')
-    #parser.add_argument('--host', default='127.0.0.1')
-    parser.add_argument('--host', default='0.0.0.0')
+    parser.add_argument('--host', default='127.0.0.1')
+    #parser.add_argument('--host', default='0.0.0.0')
     parser.add_argument('-p', '--port', default=9000, type=int)
     parser.add_argument('--ssl-port', default=9443, type=int)
     parser.add_argument('--ssl', action='store_true')
@@ -197,8 +197,8 @@ if __name__ == '__main__':
             'tools.websocket.protocols': ['tcp', 'toto', 'mytest', 'hithere']
         },
         '/static': {
-              'tools.staticdir.on': True,
-              'tools.staticdir.dir': ''
+            'tools.staticdir.on': True,
+            'tools.staticdir.dir': ''
         },
     }
 
