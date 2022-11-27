@@ -18,7 +18,6 @@
       function getCurrentURL () {
         return window.location.href
       }
-
       // Example
       const url = getCurrentURL()
 
@@ -35,6 +34,8 @@
         actual_page = "Home"
       }
     </script>
+
+    
 
     <script>document.write(`<title>Data Tools | ${actual_page}</title>`);</script>
 
@@ -56,19 +57,24 @@
       <div class="navbar-expand expand" id="navbarsExample09">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item ">
-            <a href="/" class="nav-link">Home</a>
+            <script>document.write(`<a href="http://${window.location.href.split("/")[2].replace(":9000","")}/" class="nav-link">Home</a>`)</script>
           </li>
           <li class="nav-item">
-            <a href="/blog" class="nav-link">Blog</a>
+            <script>document.write(`<a href="http://${window.location.href.split("/")[2].replace(":9000","")}/blog" class="nav-link">Blog</a>`)</script>
           </li>
           <li class="nav-item">
-            <a href="/about" class="nav-link">Sobre</a>
+            <script>document.write(`<a href="http://${window.location.href.split("/")[2].replace(":9000","")}/about" class="nav-link">Sobre</a>`)</script>
+          </li>
+          <li class="nav-item">
+            <script>document.write(`<a href="http://${window.location.href.split("/")[2].replace(":9000","")}:9000/" class="nav-link">Chat</a>`)</script>
           </li>
             
-        
+        <!-- SEARCH FIELD
         <form class="form-inline my-2 my-md-0" action="/search" METHOD="GET">
           <input class="form-control" type="text" id="search" name="search"  placeholder="Search" aria-label="Search">
         </form>
+        -->
+
       </ul>
       </div>
     </nav>
