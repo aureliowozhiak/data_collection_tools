@@ -137,6 +137,7 @@ class Chat(object):
           };
           ws.onclose = function(evt) {
              $('#chat').val($('#chat').val() + 'Connection closed by server: ' + evt.code + ' \"' + evt.reason + '\". Refresh to reconnect.\\n');
+             location.reload();
              ws.close(1000, '**%(username)s**: Saiu da sala');
           };
           $('#send').click(function() {
