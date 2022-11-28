@@ -10,7 +10,11 @@
 
             <div class="col">
               <br>
-              <input type="text" class="form-control" id="input_value" name="input_value" value="" placeholder="Insira o URL de uma página que contém uma tabela html">
+              <script>
+              var input_value = decodeURIComponent(location.search.split('input_value=')[1])
+              document.write('<input type="text" class="form-control" id="input_value" name="input_value" value="'+input_value+'" placeholder="Insira o URL de uma página que contém uma tabela html" required>')
+
+              </script>
             </div>
 
             <div class="col-auto">

@@ -83,7 +83,7 @@ class viewScraper:
         return None
 
     def table_scraping(input_value=None, tables=None, index=0):
-        
+        body = open('src/tools/table_scraping.html', 'r').read()
         input_value = str(input_value)
         index = int(index)
         print(os.listdir())
@@ -93,24 +93,23 @@ class viewScraper:
                 index = max + 1
             if  max >= index:
                 table = tables[index - 1]
-                return f'<div class="container"><div class="row"><div class="col-sm"><script>{tabletools_js}</script> \
-                    <script></script> \
-                    <br>\
+                table_html = f'<div class="container"><div class="row"><div class="col-sm"><script>{tabletools_js}</script> \
                     <a href="#" onclick="download_table_as_csv(\'dataframe\');"><button type="button" class="btn btn-primary">Download as CSV</button></a> \
                      <br> <br> {table.to_html()} <br></div> \
                         <script type="text/javascript"> \
                         add_class_by_class(\'table\', \'dataframe\'); \
                     </script></div></div>'
+                return body + table_html
             else:
-                return f'This page has just {max} tables'
+                return body + f'Essa página tem apenas {max} tabela(s)'
         except:
-            return f'Tables not found'
+            return f'Nenhuma tabela encontrada'
 
     def web_scraping(dict_of_data, input_value):
 
         body = '<br><div class="container text-center">'
 
-        body += ""
+        body += open('src/tools/web_scraping.html', 'r').read()
 
         count_cards = 0
 
