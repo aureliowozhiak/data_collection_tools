@@ -137,6 +137,7 @@ class Chat(object):
           };
           ws.onclose = function(evt) {
              $('#chat').val($('#chat').val() + 'Connection closed by server: ' + evt.code + ' \"' + evt.reason + '\". Refresh to reconnect.\\n');
+             ws.close(1000, '**%(username)s**: Saiu da sala');
           };
           $('#send').click(function() {
              console.log($('#message').val());
@@ -215,4 +216,4 @@ if __name__ == '__main__':
     cherrypy.tools.websocket = WebSocketTool()
 
     app_root = Chat(args.host, args.port, args.ssl, ssl_port=args.ssl_port)
-    cherrypy.quickstart(app_root, '/', config=config)
+    cherrypy.quickstart(app_root, '', config=config)
