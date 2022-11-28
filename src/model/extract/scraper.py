@@ -43,9 +43,12 @@ class modelScraper:
     def get_tables(url_page = "https://pt.wikipedia.org/wiki/Python", index = None):
         tables = pd.read_html(url_page)
 
-        if index != None and index < len(tables):
-            return tables[index]
-        return tables
+        try:
+            if index != None and index < len(tables):
+                return tables[index]
+            return tables
+        except:
+            return []
 
     def get_data_from_page(url_page = "https://pt.wikipedia.org/wiki/Python"):
 
