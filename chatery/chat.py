@@ -86,7 +86,7 @@ class Chat(object):
     @cherrypy.expose
     def index(self):
         return header + """
-    <h1>Data Tools Chat</h1>
+    <h1>Chat</h1>
     <form action='/chatroom' id='chatform' method='get'>
       <input type='text' name='username' id='username' class='form-control' placeholder="Digite seu nome de usuário"/><br />
       <input id='send' type='submit' value='Ir para o chat' class='form-control btn btn-primary'/>
@@ -150,7 +150,8 @@ class Chat(object):
           textarea.scrollTop = textarea.scrollHeight;
         });
       </script>
-    <h1>Data Tools Chat</h1>
+    <h1>Chat</h1>
+    <p>Chat temporário <em>(reseta a cada 5 minutos)</em>, para falar sobre assuntos da área de dados e matemática no geral.</p>
     <div  class="form-group">
         <form action='#' id='chatform' method='get'>
           <textarea id='chat' cols='35' rows='10' class="form-control"  disabled>%(messages)s</textarea>
@@ -158,6 +159,10 @@ class Chat(object):
           <input type='text' id='message' class="form-control" placeholder='Digite sua mensagem' />
           <input id='send' type='submit' class="form-control"  value='Enviar mensagem' class='form-control btn btn-primary'/>
           </form>
+    <h2>Agenda:</h2>
+    <ul>
+        <li>Engenheiro de Dados tirando dúvida de segunda a sexta-feira das 19hrs as 20hrs</li>
+    </ul>
     </div>
     </body>
     </html>
