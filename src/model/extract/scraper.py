@@ -1,7 +1,9 @@
 import pandas as pd
 import requests
-
-
+import sqlite3
+            
+DB_STRING = 'scraper_data.db'
+            
 class modelScraper:
     """
     A class to do scraper in pages with specific (or not) parameters
@@ -36,11 +38,19 @@ class modelScraper:
     def __init__(self):
         return None
 
+    def save_url_queried_in_database(url_page, scraper_type):
+        with sqlite3.connect(DB_STRING) as dbc:
+            dbc.execute("INSERT INTO url_queried (url_page, scraper_type) VALUES (?, ?)",
+                        [url_page, scraper_type])
+
 
     def get_generical_page(url_page = "https://pt.wikipedia.org/wiki/Python"):
         return requests.get(url_page)
 
     def get_tables(url_page = "https://pt.wikipedia.org/wiki/Python", index = None):
+
+        modelScraper.save_url_queried_in_database(url_page, 'table_scraping')
+
         tables = pd.read_html(url_page)
 
         try:

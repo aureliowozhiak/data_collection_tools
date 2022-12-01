@@ -5,8 +5,6 @@ header = open('../web/src/header.html', 'r').read()
 sys.path.append('../cherrypy/')
 import cherrypy
 
-DB_STRING = 'chat_data.db'
-
 # -*- coding: utf-8 -*-
 import time
 import sqlite3
