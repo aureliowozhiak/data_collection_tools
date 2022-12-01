@@ -5,6 +5,9 @@ import sys
 sys.path.append('../')
 
 from src.view.web.web_view import WebView
+from src.model.transform.transform_numbers import TransformNumbers
+from src.view.basic_plots import BasicPlots
+
 import os
 
 try:
@@ -93,6 +96,7 @@ class viewScraper:
                 index = max + 1
             if  max >= index:
                 table = tables[index - 1]
+                                
                 table_html = f'<div class="container"><div class="row"><div class="col-sm"><script>{tabletools_js}</script> \
                     <a href="#" onclick="download_table_as_csv(\'dataframe\');"><button type="button" class="btn btn-primary">Download as CSV</button></a> \
                      <br> <br> {table.to_html()} <br></div> \
