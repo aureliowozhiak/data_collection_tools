@@ -4,6 +4,7 @@ sys.path.append('../')
 from src.controller.extract.scraper import controllerScraper
 from src.view.web.web_view import WebView
 from src.controller.blog.tabnews import controllerTabNews
+from src.controller.blog.auto_blog import controllerAutoBlog
 
 from src.controller.another_tools.math import controllerMath
 
@@ -29,15 +30,17 @@ class AboutPage:
 
     @cherrypy.expose
     def index(self):
-        return header + controllerTabNews.home(user="aureliowozhiak", page="data-tools-ferramenta-em-desenvolvimento-para-trabalhar-com-dados-projeto-github")
+        return header + controllerAutoBlog.home()
+        #return header + controllerTabNews.home(user="aureliowozhiak", page="data-tools-ferramenta-em-desenvolvimento-para-trabalhar-com-dados-projeto-github")
 
 
 
 class BlogPage:
 
     @cherrypy.expose
-    def index(self, page = None):
-        return header + controllerTabNews.home(user="aureliowozhiak", page=page)
+    def index(self, theme = None):
+        return header + controllerAutoBlog.home(theme=theme)
+        #return header + controllerTabNews.home(user="aureliowozhiak", page=page)
 
 class Tools:
     def __init__(self):
