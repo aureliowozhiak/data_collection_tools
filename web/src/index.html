@@ -1,27 +1,30 @@
 <br>
 <div class="container text-center">
-    <div class="card-group">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    
 
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 50%;">
             <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
             <div class="card-body">
             <h5 class="card-title">Web scraping</h5>
             <p class="card-text">Encontre dados e informações de uma página HTML</p>
             <!-- <a href="/tools/web_scraping/" class="btn btn-primary">Explore os dados de um site</a>  -->
 
-            <form class="row g-2" action="/tools/scraper" METHOD="GET">
+                <form class="row g-2" action="/tools/scraper" METHOD="GET">
                 
                   <input type="hidden" id="scraper_type" name="scraper_type" value="web_scraping">
                   <input type="hidden" class="form-control" id="index" name="index" value="-1"> 
                   <input type="text" class="form-control" id="input_value" name="input_value" value="" placeholder="Insira o URL de uma página html" required>
-                <br>
-                    <button type="submit" class="btn btn-primary mb-3">Explore os dados do site</button>
+ <br>
+                    <button type="submit" class="btn btn-primary mb-3 card-text">Explore o site</button>
                   
             </form>
             </div>
         </div>
 
-        <div class="card" style="width: 18rem;">
+
+
+        <div class="card" style="width: 50%;">
             <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
             <div class="card-body">
             <h5 class="card-title">Table scraping</h5>
@@ -34,15 +37,17 @@
                   <input type="hidden" class="form-control" id="index" name="index" value="1"> 
                   <input type="text" class="form-control" id="input_value" name="input_value" value="" placeholder="Insira o URL de uma página que contém uma tabela html" required>
                 <br>
-                    <button type="submit" class="btn btn-primary mb-3">Pegue uma tabela</button>
+                    <button type="submit" class="btn btn-primary mb-3 card-text">Pegue uma tabela</button>
                 </div>   
             </form>
 
             
         </div>
         
+
         
-        <div class="card" style="width: 18rem;">
+        
+        <div class="card" style="width: 50%;">
             <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
             <div class="card-body">
             <h5 class="card-title">Expressões matemáticas</h5>
@@ -53,11 +58,17 @@
                 <input type="hidden" id="math_type" name="math_type" value="calc_expression">
                 <input type="text" class="form-control" id="input_value" name="input_value" value="" placeholder="Insira uma expressão aritmética" required>
                 <br>
-                <button type="submit" class="btn btn-primary mb-3">Calcule</button>
+                <button type="submit" class="btn btn-primary mb-3 card-text">Calcule</button>
             </form>
         
         </div>
         </div>
+        
+
+        
+
+        
+        </div>
 
     </div>
-</div>
+</div></div>
