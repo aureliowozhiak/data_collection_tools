@@ -22,8 +22,8 @@ class ViewerIndex:
         #st.sidebar.title("Data Solutions")
         #with st.sidebar:
         # horizontal Menu
-        return option_menu(None, ["Home", "Upload", "Tasks", 'Settings'], 
-            icons=['house', 'cloud-upload', "list-task", 'gear'], 
+        return option_menu(None, ["Home", "Upload", 'About'], 
+            icons=['house', 'cloud-upload', 'briefcase'], 
             menu_icon="cast", default_index=0, orientation="horizontal")
 
 
@@ -32,3 +32,13 @@ class ViewerIndex:
         ##MainMenu {visibility: hidden;}
         #footer {visibility: hidden;}
         #</style> """, unsafe_allow_html=True)
+
+    def home(self):
+        st.title("Welcome to the data solutions")
+
+
+    def about(self):
+        st.title("About")
+        st.write("""
+        Our data consulting project involves helping retail companies optimize their sales forecasting and data collection processes. We will review current methods, design a new data collection system, improve forecasting models using advanced statistical techniques, and provide ongoing support and monitoring. Our goal is to help companies make better data-driven decisions to drive business growth.
+        """)
