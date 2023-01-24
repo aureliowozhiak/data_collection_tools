@@ -1,7 +1,4 @@
-requests==2.28.1
-pandas==1.5.2
-markdown==3.4.1
-lxml==4.9.1
-bs4==0.0.1
-CherryPy==18.8.0
-numexpr==2.8.4
+streamlit==1.17.0
+streamlit-option-menu==0.3.2
+pandas_profiling==3.6.2
+streamlit_pandas_profiling==0.1.3
