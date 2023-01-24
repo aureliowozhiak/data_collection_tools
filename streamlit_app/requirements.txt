@@ -1,0 +1,4 @@
+streamlit==1.17.0
+streamlit-option-menu==0.3.2
+pandas_profiling==3.6.2
+streamlit_pandas_profiling==0.1.3
