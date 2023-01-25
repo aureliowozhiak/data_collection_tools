@@ -5,7 +5,7 @@ import sys
 sys.path.append('../src/')
 
 from model.another_tools.math import modelMath
-from view.web.another_tools.math import viewMath
+#from view.web.another_tools.math import viewMath
 
 class controllerMath:
 
@@ -16,7 +16,7 @@ class controllerMath:
         input_value = input_value.replace("^", "**")
 
         if math_type == "calc_expression":
-            return f"{input_value} = {viewMath.calc_expression(modelMath.calc_expression(input_value))}"
+            return modelMath.calc_expression(input_value)
         else:
             return ""
 

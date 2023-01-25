@@ -8,12 +8,19 @@ import pandas as pd
 from st_aggrid import AgGrid
 
 from model.index import ModelIndex
-from model.linear_regression import ModelLinearRegressionForecast
 from viewer.index import ViewerIndex
-from viewer.linear_regression import ViewerLinearRegressionForecast
+from viewer.about import ViewerAbout
+
+
+from controller.another_tools.math import controllerMath
+from viewer.web.another_tools.math import viewMath
+
+from controller.extract.scraper import controllerScraper
+
+from model.data_analysis import DataAnalysis
 
 class ControllerIndex:
-
+    
     def __init__(self):
         self.selected = "Home"
         pass
@@ -24,48 +31,67 @@ class ControllerIndex:
 
     def get_page(self):
         if self.selected == 'Home':
-            ViewerIndex().home()
+            ViewerIndex().page()
 
-        if self.selected == 'Upload':
-            st.title("Upload page")
-            file = st.file_uploader("Data: ", type=['csv'])
-            decimal = st.selectbox('Select the decimal:', [',','.'])
-            sep = st.selectbox('Select the separator', [',', ';'])
+        if self.selected == 'Analysis':
+            st.title("Analysis page")
 
-            if file is not None:
-                st.session_state['data'] = ModelIndex().get_default_data(file=file, decimal=decimal, sep=sep)
-                st.dataframe(st.session_state['data'])
+            upload_method = st.selectbox("What do you want to do?", ['Upload a new file', 'Load a saved data table'])
+            
+            if upload_method == "Upload a new file":
+                st.session_state['tmp_data'] = pd.DataFrame()
+                file = st.file_uploader("Data: ", type=['csv'])
+                decimal = st.selectbox('Select the decimal:', ['.',','])
+                sep = st.selectbox('Select the separator', [',', ';'])
 
-                columns = st.session_state['data'].columns
-                
-                column_of_date = st.selectbox('What is the date column?', columns)
-                column_to_predict = st.selectbox('What do you want to predict?', columns)
-
-                if st.selectbox('Did you find any outliers?', ['No', 'Yes']) == 'Yes':
-                    outlier_cutoff = st.number_input('What is the cutoff value for outlier:')
-                    df = st.session_state['data']
-                    st.session_state['data'] = df[df[column_to_predict] < outlier_cutoff]
-                
-                periods = int(st.selectbox('How many months do you want to predict into the future?', [3, 6, 9, 12]))
-                if st.button("Predict the future"):
-                    if periods > 0:
-                        lrf = ModelLinearRegressionForecast(
-                            df=st.session_state['data'],
-                            periods=periods,
-                            column_to_predict=column_to_predict,
-                            column_of_date=column_of_date)
-
-                        forecast, X_train, y_train, reg = lrf.predict()
-                        st.write(forecast)
-
-                        ViewerLinearRegressionForecast().plot(X_train, y_train, reg)
+                if file is not None:
+                    st.session_state['tmp_data'] = ModelIndex().get_default_data(file=file, decimal=decimal, sep=sep)
+                    DataAnalysis().get_full_analysis(st.session_state['tmp_data'])
+                    tmp_name = st.text_input("Name your table")
+                    if tmp_name != "":
+                        st.session_state[tmp_name] = st.session_state['tmp_data']
+                        st.write("your table has been renamed, and is saved in the session (temporarily)")
 
 
-                if st.button("View data report"):
-                    #st.dataframe(st.session_state['data'])
-                    ModelIndex().generate_st_profile_report(st.session_state['data'])
+            if upload_method == 'Load a saved data table':
+                st.session_state['tmp_data'] = pd.DataFrame()
+                table_date_name = st.selectbox("Select the data table", list(dict(st.session_state).keys()))
+                st.session_state['tmp_data'] = st.session_state[table_date_name]
+                DataAnalysis().get_full_analysis(st.session_state['tmp_data'])
+
+
 
         if self.selected == 'About':
-            ViewerIndex().about()
+            ViewerAbout().page()
+
+        if self.selected == 'Another Tools':
+            tool_selected = st.selectbox('Select a tool', ['Math Tool', 'Table Scraping', 'Web Scraping'])
+            
+            if tool_selected == 'Math Tool':
+                expression = st.text_input("Enter a math expression")
+                result = controllerMath.main(input_value=expression, math_type='calc_expression')
+                st.write(viewMath.calc_expression(expression, result), unsafe_allow_html=True)
+            
+            if tool_selected == 'Table Scraping':
+                input_value = st.text_input("Enter the url page")
+
+                if input_value:
+                    index_list = []
+                    index_list.extend(range(1, len(controllerScraper.main(input_value, 'table_scraping'))))
+                    index = int(st.selectbox('Select the table position.', index_list))
+                    if index > 0:
+                        st.session_state['tmp_data'] = controllerScraper.main(input_value, 'table_scraping', index)
+                    
+                        st.write(st.session_state['tmp_data'], unsafe_allow_html=True)
+
+                        tmp_name = st.text_input("Name your table")
+                        if tmp_name != "":
+                            st.session_state[tmp_name] = st.session_state['tmp_data']
+                            st.write("your table has been renamed, and is saved in the session (temporarily)")
+
+                
+
+            if tool_selected == 'Web Scraping':
+                pass
 
 

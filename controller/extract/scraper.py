@@ -5,7 +5,7 @@ import sys
 sys.path.append('../src/')
 
 from model.extract.scraper import modelScraper
-from view.web.extract.scraper import viewScraper
+#from view.web.extract.scraper import viewScraper
 from model.transform.transform_scraper_data import transformScraperData
 
 class controllerScraper:
@@ -57,9 +57,7 @@ class controllerScraper:
         index = int(index)
 
         if scraper_type == "table_scraping":
-            return {
-                    'html' : viewScraper.table_scraping(input_value, modelScraper.get_tables(input_value), index)
-                    }
+            return modelScraper.get_tables(input_value, index)
         
         
         def wikipedia(html_soup, input_value, extra_content=""):
@@ -69,13 +67,13 @@ class controllerScraper:
             html_soup = transformScraperData.html_parser(page_content)
             try:
                 list_of_paragraphs = transformScraperData.get_all_paragraph_content(html_soup.find_all(class_="mw-content-container")[0])
-
-                return {
-                    'html' : extra_content + viewScraper.wikipedia_content(list_of_paragraphs, transformScraperData.page_title(html_soup), input_value),
-                    'list_of_paragraphs' : list_of_paragraphs
-                }
+                return list_of_paragraphs
+                #return {
+                #    'html' : extra_content + viewScraper.wikipedia_content(list_of_paragraphs, transformScraperData.page_title(html_soup), input_value),
+                #    'list_of_paragraphs' : list_of_paragraphs
+                #}
             except:
-                return {'html': '', 'list_of_paragraphs': ''}
+                return ''
 
         page_content = modelScraper.get_data_from_page(input_value)
         html_soup = transformScraperData.html_parser(page_content)
@@ -95,34 +93,35 @@ class controllerScraper:
                 'all_key_content' : transformScraperData.get_all_key_content(html_soup),
                 'wikipedia_content' : wikipedia(html_soup, input_value)
                 }
-
-            return {
-                    'html' : viewScraper.web_scraping(dict_of_data, input_value),
-                    'dict_of_data' : dict_of_data,
-                    'input_value' : input_value
-                    }
+            return dict_of_data
+            #return {
+            #        'html' : viewScraper.web_scraping(dict_of_data, input_value),
+            #        'dict_of_data' : dict_of_data,
+            #        'input_value' : input_value
+            #        }
 
 
         if scraper_type == "links_scrapping":
-            return {
-                    'html': viewScraper.links(df_links),
-                    'df_links': df_links
-                    }
+            return df_links
+            #return {
+            #        'html': viewScraper.links(df_links),
+            #        'df_links': df_links
+            #        }
 
         if scraper_type == "p_scrapping":
             p_list = transformScraperData.get_all_paragraph_content(html_soup)
-
-            return {
-                    'html': viewScraper.list_to_table(p_list, 'paragraphs'),
-                    'p_list': p_list
-            }
+            return p_list
+            #return {
+            #        'html': viewScraper.list_to_table(p_list, 'paragraphs'),
+            #        'p_list': p_list
+            #}
 
         if scraper_type == "key_content_scrapping":
             key_content_scrapping_list = transformScraperData.get_all_key_content(html_soup)
-
-            return {
-                    'html': viewScraper.list_to_table(key_content_scrapping_list, 'key_content'),
-                    'key_content_scrapping_list': key_content_scrapping_list
-            }
+            return key_content_scrapping_list
+            #return {
+            #        'html': viewScraper.list_to_table(key_content_scrapping_list, 'key_content'),
+            #        'key_content_scrapping_list': key_content_scrapping_list
+            #}
 
         return ""
